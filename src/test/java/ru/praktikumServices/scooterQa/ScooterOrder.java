@@ -1,6 +1,7 @@
 package ru.praktikumServices.scooterQa;
 
 import org.junit.Test;
+import org.openqa.selenium.support.PageFactory;
 import ru.praktikumServices.Object.ScooterOrderObject;
 
 import static org.junit.Assert.*;
@@ -8,25 +9,24 @@ import static org.junit.Assert.*;
 public class ScooterOrder extends BaseTest {
 
     @Test
-    public void firsOrderScooter() {
+    public void firstOrderScooter() {
         ScooterOrderObject scooterOrderObject = new ScooterOrderObject(driver);
+        PageFactory.initElements(driver, scooterOrderObject);
 
         scooterOrderObject
-                .clickButton()
-                .fillName("Иван")
-                .fillSurname("Иванов")
-                .fillAddress("г. Москва")
-                .clickSelect(".//div[@class='select-search__select']//li[@data-value='1']")
-                .fillTelephone("+79099099999")
-                .clickNextButton();
+                .clickButton(scooterOrderObject.getOrderButton())
+                .fillInputs("Иван", "Иванов", "г. Москва")
+                .selectValue(scooterOrderObject.getSelectMetro(), scooterOrderObject.getFirstStationValue())
+                .fillInput(scooterOrderObject.getTelephoneInput(), "79899899999")
+                .clickButton(scooterOrderObject.getNextButton());
 
         scooterOrderObject
-                .pickDate("react-datepicker__day--today")
-                .rentalData(".//div[contains(@class, 'Dropdown-option') and contains(text() ,'сутки')]")
-                .chooseColor("black")
-                .commentCourier("Привет, хочу этот самокат побыстрее!")
-                .successOrder()
-                .clickYesButton();
+                .selectValue(scooterOrderObject.getDateInput(), scooterOrderObject.getDayOne())
+                .selectValue(scooterOrderObject.getRentalPeriod(), scooterOrderObject.getRentalTimeOne())
+                .clickButton(scooterOrderObject.getFirstColor())
+                .fillInput(scooterOrderObject.getComment(), "Привет, хочу этот самокат побыстрее!")
+                .clickButton(scooterOrderObject.getSuccessOrderButton())
+                .clickButton(scooterOrderObject.getYesButton());
 
         boolean result = scooterOrderObject.popup();
         assertTrue(result);
@@ -35,26 +35,24 @@ public class ScooterOrder extends BaseTest {
     @Test
     public void secondOrderScooter() {
         ScooterOrderObject scooterOrderObject = new ScooterOrderObject(driver);
+        PageFactory.initElements(driver, scooterOrderObject);
 
         scooterOrderObject
-                .clickButton()
-                .fillName("Петр")
-                .fillSurname("Петров")
-                .fillAddress("г. Архангельск")
-                .clickSelect(".//div[@class='select-search__select']//li[@data-value='2']")
-                .fillTelephone("+79895554422")
-                .clickNextButton();
+                .clickButton(scooterOrderObject.getOrderButton())
+                .fillInputs("Петр", "Петров", "г. Архангельск")
+                .selectValue(scooterOrderObject.getSelectMetro(), scooterOrderObject.getSecondStationValue())
+                .fillInput(scooterOrderObject.getTelephoneInput(), "79695554477")
+                .clickButton(scooterOrderObject.getNextButton());
 
         scooterOrderObject
-                .pickDate("react-datepicker__day--weekend")
-                .rentalData(".//div[contains(@class, 'Dropdown-option') and contains(text() ,'трое суток')]")
-                .chooseColor("grey")
-                .commentCourier("Здравствуйте, желательно доставить самокат на 9 этаж! Лифт не работает:(")
-                .successOrder()
-                .clickYesButton();
+                .selectValue(scooterOrderObject.getDateInput(), scooterOrderObject.getDayTwo())
+                .selectValue(scooterOrderObject.getRentalPeriod(), scooterOrderObject.getRentalTimeTwo())
+                .clickButton(scooterOrderObject.getFirstColor())
+                .fillInput(scooterOrderObject.getComment(), "Здравствуйте! Лифт не работает, поэтому тащить самокат придется до 9 этажа:(")
+                .clickButton(scooterOrderObject.getSuccessOrderButton())
+                .clickButton(scooterOrderObject.getYesButton());
 
         boolean result = scooterOrderObject.popup();
         assertTrue(result);
     }
-
 }

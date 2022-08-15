@@ -1,7 +1,8 @@
 package ru.praktikumServices.Object;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ScooterOrderObject {
     WebDriver driver;
@@ -15,117 +16,193 @@ public class ScooterOrderObject {
 
     // Страница "Для кого самокат"
     // Кнопка "Заказать"
-    private By orderButton = By.className("Button_Button__ra12g");
+    @FindBy(className = "Button_Button__ra12g")
+    private WebElement orderButton;
 
     // Поле "Имя"
-    private By nameInput = By.xpath(".//input[@placeholder='* Имя']");
+    @FindBy(xpath = ".//input[@placeholder='* Имя']")
+    private WebElement nameInput;
 
     // Поле "Фамилия"
-    private By surnameInput = By.xpath(".//input[@placeholder='* Фамилия']");
+    @FindBy(xpath = ".//input[@placeholder='* Фамилия']")
+    private WebElement surnameInput;
 
     // Поле "Адрес"
-    private By addressInput = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
+    @FindBy(xpath = ".//input[@placeholder='* Адрес: куда привезти заказ']")
+    private WebElement addressInput;
 
     // Список станций метро
-    private By selectMetro = By.className("select-search__input");
+    @FindBy(className = "select-search__input")
+    private WebElement selectMetro;
+
+    // Выбор станции - для двух тестов
+    @FindBy(xpath = ".//div[@class='select-search__select']//li[@data-value='1']")
+    private WebElement firstStationValue;
+    @FindBy(xpath = ".//div[@class='select-search__select']//li[@data-value='2']")
+    private WebElement secondStationValue;
 
     // Поле "Телефон"
-    private By telephoneInput = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    @FindBy(xpath = ".//input[@placeholder='* Телефон: на него позвонит курьер']")
+    private WebElement telephoneInput;
 
     // Кнопка "Далее"
-    private By nextButton = By.xpath(".//div[@class='Order_NextButton__1_rCA']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Далее')]");
+    @FindBy(xpath = ".//div[@class='Order_NextButton__1_rCA']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Далее')]")
+    private WebElement nextButton;
 
     // -- Страница "Про аренду" --
     // Поле "Дата"
-    private By dataInput = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    @FindBy(xpath = ".//input[@placeholder='* Когда привезти самокат']")
+    private WebElement dateInput;
+
+    // Кнопки даты для двух тестов
+    @FindBy(className = "react-datepicker__day--today")
+    private WebElement dayOne;
+    @FindBy(className = "react-datepicker__day--weekend")
+    private WebElement dayTwo;
 
     // Список "Срок аренды"
-    private By rentalPeriod = By.className("Dropdown-control");
+    @FindBy(className = "Dropdown-control")
+    private WebElement rentalPeriod;
+
+    // Выбор длительности аренды для двух тестов
+    @FindBy(xpath = ".//div[contains(@class, 'Dropdown-option') and contains(text() ,'сутки')]")
+    private WebElement rentalTimeOne;
+    @FindBy(xpath = ".//div[contains(@class, 'Dropdown-option') and contains(text() ,'сутки')]")
+    private WebElement rentalTimeTwo;
+
+    // Кнопки выбора цвета
+    @FindBy(id = "black")
+    private WebElement firstColor;
+    @FindBy(id = "gray")
+    private WebElement secondColor;
 
     // Поле "Комментарий для курьера"
-    private By comment = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+    @FindBy(xpath = ".//input[@placeholder='Комментарий для курьера']")
+    private WebElement comment;
 
     // Кнопка "Заказать"
-    private By successOrderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Заказать')]");
+    @FindBy(xpath = ".//div[@class='Order_Buttons__1xGrp']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Заказать')]")
+    private WebElement successOrderButton;
 
     // Кнопка "Да" в блоке подтверждения заказа
-    private By yesButton = By.xpath(".//div[@class='Order_Modal__YZ-d3']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Да')]");
+    @FindBy(xpath = ".//div[@class='Order_Modal__YZ-d3']//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text() ,'Да')]")
+    private WebElement yesButton;
 
     // Окно с сообщением об успешном создании заказа
-    private By successPopup = By.className("Order_Modal__YZ-d3");
+    @FindBy(className = "Order_Modal__YZ-d3")
+    private WebElement successPopup;
 
-    // -- Страница "Для кого самокат" --
-    public ScooterOrderObject clickButton() {
-        driver.findElement(orderButton).click();
+    // Геттеры для элементов со страницы "Для кого самокат"
+    public WebElement getOrderButton() {
+        return orderButton;
+    }
+
+    public WebElement getNameInput() {
+        return nameInput;
+    }
+
+    public WebElement getSurnameInput() {
+        return surnameInput;
+    }
+
+    public WebElement getAddressInput() {
+        return addressInput;
+    }
+
+    public WebElement getSelectMetro() {
+        return selectMetro;
+    }
+
+    public WebElement getFirstStationValue() {
+        return firstStationValue;
+    }
+
+    public WebElement getSecondStationValue() {
+        return secondStationValue;
+    }
+
+    public WebElement getTelephoneInput() {
+        return telephoneInput;
+    }
+
+    public WebElement getNextButton() {
+        return nextButton;
+    }
+
+    // Геттеры для элементов со страницы "Для кого самокат"
+    public WebElement getDateInput() {
+        return dateInput;
+    }
+
+    public WebElement getDayOne() {
+        return dayOne;
+    }
+
+    public WebElement getDayTwo() {
+        return dayTwo;
+    }
+
+    public WebElement getRentalPeriod() {
+        return rentalPeriod;
+    }
+
+    public WebElement getRentalTimeOne() {
+        return rentalTimeOne;
+    }
+
+    public WebElement getRentalTimeTwo() {
+        return rentalTimeTwo;
+    }
+
+    public WebElement getFirstColor() {
+        return firstColor;
+    }
+
+    public WebElement getSecondColor() {
+        return secondColor;
+    }
+
+    public WebElement getComment() {
+        return comment;
+    }
+
+    public WebElement getSuccessOrderButton() {
+        return successOrderButton;
+    }
+
+    public WebElement getYesButton() {
+        return yesButton;
+    }
+
+    // Метод для клика по кнопке
+    public ScooterOrderObject clickButton(WebElement button) {
+        button.click();
         return this;
     }
 
-    public ScooterOrderObject fillName(String name) {
-        driver.findElement(nameInput).sendKeys(name);
+    // Метод для заполнения одиночного поля
+    public ScooterOrderObject fillInput(WebElement inputName, String text) {
+        inputName.sendKeys(text);
         return this;
     }
 
-    public ScooterOrderObject fillSurname(String surname) {
-        driver.findElement(surnameInput).sendKeys(surname);
+    // Метод для заполнения полей имени, фамилии и адреса
+    public ScooterOrderObject fillInputs(String name, String surname, String address) {
+        nameInput.sendKeys(name);
+        surnameInput.sendKeys(surname);
+        addressInput.sendKeys(address);
         return this;
     }
 
-    public ScooterOrderObject fillAddress(String address) {
-        driver.findElement(addressInput).sendKeys(address);
-        return this;
-    }
-
-    public ScooterOrderObject clickSelect(String value) {
-        driver.findElement(selectMetro).click();
-        driver.findElement(By.xpath(value)).click();
-        return this;
-    }
-
-    public ScooterOrderObject fillTelephone(String telephone) {
-        driver.findElement(telephoneInput).sendKeys(telephone);
-        return this;
-    }
-
-    public ScooterOrderObject clickNextButton() {
-        driver.findElement(nextButton).click();
-        return this;
-    }
-
-    // -- Страница "Про аренду" --
-    public ScooterOrderObject pickDate(String dayPicker) {
-        driver.findElement(dataInput).click();
-        driver.findElement(By.className(dayPicker)).click();
-        return this;
-    }
-
-    public ScooterOrderObject rentalData(String value) {
-        driver.findElement(rentalPeriod).click();
-        driver.findElement(By.xpath(value)).click();
-        return this;
-    }
-
-    public ScooterOrderObject chooseColor(String color) {
-        driver.findElement(By.id(color)).click();
-        return this;
-    }
-
-    public ScooterOrderObject commentCourier(String text) {
-        driver.findElement(comment).sendKeys(text);
-        return this;
-    }
-
-    public ScooterOrderObject successOrder() {
-        driver.findElement(successOrderButton).click();
-        return this;
-    }
-
-    public ScooterOrderObject clickYesButton() {
-        driver.findElement(yesButton).click();
+    // Метод для выбора элемента из выпадающего списка
+    public ScooterOrderObject selectValue(WebElement clickButton, WebElement value) {
+        clickButton.click();
+        value.click();
         return this;
     }
 
     public boolean popup() {
-        boolean window = driver.findElement(successPopup).isDisplayed();
+        boolean window = successPopup.isDisplayed();
         return window;
     }
 }
